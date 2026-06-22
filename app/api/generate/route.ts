@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { groq, MODEL } from '@/lib/groq'
+import { getGroq, MODEL } from '@/lib/groq'
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 Характеристики: ${features || 'не указаны'}
 Целевая аудитория: ${audience || 'широкая'}`
 
-    const completion = await groq.chat.completions.create({
+    const completion = await getGroq().chat.completions.create({
       model: MODEL,
       temperature: 0.8,
       response_format: { type: 'json_object' },
